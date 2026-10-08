@@ -23,7 +23,35 @@ npm start        # serves the app at http://localhost:3000
 `npm run dev` starts the server with auto-reload on file changes.
 
 The database is created automatically at `data/crm.db`. Override the location with
-`CRM_DB_PATH`, and the port with `PORT`.
+`CRM_DB_PATH`, the port with `PORT`, and the listen address with `HOST` (default `0.0.0.0`,
+which accepts connections from other computers on the network).
+
+## Sharing with your team
+
+The CRM is a web server, so it should run on **one** computer (an always-on PC or a small
+server). Everyone else opens it in their browser; nobody needs Node or a copy of the code.
+
+1. Install the app on the host computer following the steps above.
+2. Start it with `npm start` (on Windows you can double-click `start-crm.cmd`). The startup
+   message prints the address other computers can use, e.g. `http://192.168.1.25:3000`.
+3. Allow the port through the host's firewall. On Windows, run once in an elevated PowerShell:
+
+   ```powershell
+   New-NetFirewallRule -DisplayName "Sales CRM" -Direction Inbound -Protocol TCP -LocalPort 3000 -Action Allow
+   ```
+
+4. Share that address with the team. Give the host computer a fixed IP address (or use its
+   hostname, e.g. `http://SALES-PC:3000`) so the link does not change.
+5. To keep it running after reboots on Windows, open Task Scheduler and create a task that runs
+   `start-crm.cmd` **At startup**, with "Run whether user is logged on or not" selected.
+
+All data lives in `data/crm.db` on the host computer. Back that file up regularly.
+
+Do **not** run the app from a network share with several people starting it at once: each copy
+would open the same SQLite file over the network, which SQLite does not support safely.
+
+**Note:** there is no login. Anyone who can reach the host on the network can view and edit
+the data, so keep it on a private office network or VPN, not the public internet.
 
 ## Features
 
