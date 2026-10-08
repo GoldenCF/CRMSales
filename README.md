@@ -88,6 +88,11 @@ curl -X POST localhost:3000/api/deals \
   -d '{"title":"Annual license","value":24000,"stage":"proposal","close_date":"2026-11-30"}'
 ```
 
+## Architecture
+
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the system architecture, data model,
+request flow, deployment topology and growth roadmap.
+
 ## Project layout
 
 ```
@@ -97,6 +102,7 @@ src/server.js   entry point
 src/seed.js     sample data loader
 public/         frontend (index.html, app.js, styles.css)
 test/           API tests (node:test)
+docs/           architecture documentation
 ```
 
 ## Tests
