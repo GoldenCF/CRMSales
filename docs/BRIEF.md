@@ -281,3 +281,15 @@ The Phase 1 (Foundation) plan, plus the exact accounts, keys and DNS records I n
 | --- | --- | --- |
 | 2026-10-08 | Cloudflare Workers instead of Vercel | Vercel Hobby forbids commercial use |
 | 2026-10-08 | Sales-only scope; no invoicing | Xero stays the system of record for money |
+| 2026-10-09 | Keep repo `GoldenCF/CRMSales`; create `main` as default branch; delete the v0 Express/SQLite app in Phase 1 | Repo already exists; v0 is not the fixed stack and git history keeps it |
+| 2026-10-09 | Single package, pnpm, Node 22; no monorepo | One app and one Supabase folder; simplest |
+| 2026-10-09 | 13th table `settings` (key/value jsonb) | Rules must be editable without code |
+| 2026-10-09 | `orders.lines` as jsonb; app never writes orders | Orders come only from the weekly Xero import |
+| 2026-10-09 | Supabase signups off; admin creates users; new profiles inactive, role `sales` | Staff-only access with two locks |
+| 2026-10-09 | Two Workers on `workers.dev` (staging → dev project, prod → prod project), both behind Cloudflare Access; no custom domain for the app | Access protects `workers.dev` at the Worker level; custom domain optional later |
+| 2026-10-09 | Resend sending subdomain `mail.<domain>`, sender `crm@mail.<domain>` | Keeps CRM mail off the company mailbox domain |
+| 2026-10-09 | `main` push deploys staging; production only via gated `deploy-prod` job with CEO approval | Production changes only through CI |
+| 2026-10-09 | CI E2E login uses local Supabase + Mailpit for the one-time code | No real mailbox in CI |
+| 2026-10-09 | `timestamptz` everywhere, shown in Asia/Singapore; Monday week start; SGD 2 dp | Brief conventions |
+| 2026-10-09 | TOTP second factor via Supabase MFA, ships with Settings in Phase 3 | Free; needs the Settings screen |
+| 2026-10-09 | Accept Supabase free-tier 7-day pause risk for now; daily cron from Phase 4 keeps it active; Pro ($25/mo) is a CEO call | Free tiers only |
